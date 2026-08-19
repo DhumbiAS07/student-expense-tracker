@@ -66,6 +66,39 @@ def delete_expense():
     except ValueError:
         print("Please enter a valid number.")
 
+def edit_expense():
+    if len(expenses) == 0:
+        print("There are no expenses to edit.")
+        return
+
+    view_expenses()
+
+    choice = input("Enter the expense number to edit: ")
+
+    try:
+        index = int(choice) - 1
+
+        if index >= 0 and index < len(expenses):
+            expense = expenses[index]
+
+            print("\nEnter new details:")
+
+            amount = input("Enter new amount: ")
+            category = input("Enter new category: ")
+            date = input("Enter new date: ")
+
+            expense["amount"] = float(amount)
+            expense["category"] = category
+            expense["date"] = date
+
+            print("Expense updated!")
+
+        else:
+            print("Invalid expense number.")
+
+    except ValueError:
+        print("Please enter a valid number.")
+
 
 while True:
     print("\nStudent Expense Tracker")
@@ -73,7 +106,8 @@ while True:
     print("2. View Expenses")
     print("3. Calculate Total")
     print("4. Delete Expense")
-    print("5. Exit") 
+    print("5. Edit Expense")
+    print("6. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -85,8 +119,10 @@ while True:
         calculate_total()
     elif choice == "4":
         delete_expense()
-    elif choice == "5":     
-        print("Goodbye!")
-        break
+    elif choice == "5":
+        edit_expense()
+    elif choice == "6":        
+       print("Goodbye!")
+       break
     else:
         print("Invalid choice. Please try again.")
