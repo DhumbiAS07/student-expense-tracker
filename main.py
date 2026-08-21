@@ -50,6 +50,23 @@ def calculate_total():
 
     print("Total Expenses:", total)
 
+def category_summary():
+    summary = {}
+
+    for expense in expenses:
+        category = expense["category"]
+        amount = expense["amount"]
+
+        if category in summary:
+            summary[category] = summary[category] + amount
+        else:
+            summary[category] = amount
+
+    print("\nCategory Summary:")
+
+    for category in summary:
+        print(category + ":", summary[category])
+
 def delete_expense():
     if len(expenses) == 0:
         print("There are no expenses to delete.")
@@ -122,9 +139,10 @@ while True:
     print("1. Add Expense")
     print("2. View Expenses")
     print("3. Calculate Total")
-    print("4. Delete Expense")
-    print("5. Edit Expense")
-    print("6. Exit")
+    print("4. Category Summary")
+    print("5. Delete Expense")
+    print("6. Edit Expense")
+    print("7. Exit")   
 
     choice = input("Enter your choice: ")
 
@@ -135,10 +153,12 @@ while True:
     elif choice == "3":
         calculate_total()
     elif choice == "4":
-        delete_expense()
+        category_summary()
     elif choice == "5":
+        delete_expense()
+    elif choice == "6":
         edit_expense()
-    elif choice == "6":        
+    elif choice == "7":        
        print("Goodbye!")
        break
     else:
