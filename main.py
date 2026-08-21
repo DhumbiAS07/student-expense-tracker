@@ -64,6 +64,7 @@ def delete_expense():
 
         if index >= 0 and index < len(expenses):
             deleted_expense = expenses.pop(index)
+            save_expenses()
             print("Expense deleted:", deleted_expense)
         else:
             print("Invalid expense number.")
@@ -95,7 +96,7 @@ def edit_expense():
             expense["amount"] = float(amount)
             expense["category"] = category
             expense["date"] = date
-
+            save_expenses()
             print("Expense updated!")
 
         else:
