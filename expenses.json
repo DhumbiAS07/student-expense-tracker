@@ -1,0 +1,17 @@
+[
+    {
+        "amount": 456.0,
+        "category": "asdf",
+        "date": "1234"
+    },
+    {
+        "amount": 200.0,
+        "category": "food",
+        "date": "12-08-2026"
+    },
+    {
+        "amount": 565.0,
+        "category": "clothes",
+        "date": "30-8-2026"
+    }
+]

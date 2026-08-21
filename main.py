@@ -1,4 +1,9 @@
-expenses = []
+
+
+import json
+
+
+
 
 def add_expense():
     while True:
@@ -19,7 +24,7 @@ def add_expense():
        "date":date
     }
     expenses.append(expense)
-
+    save_expenses()
     print("Expense added!")
 
 def view_expenses():
@@ -99,7 +104,18 @@ def edit_expense():
     except ValueError:
         print("Please enter a valid number.")
 
+def save_expenses():
+    with open("expenses.json", "w") as file:
+        json.dump(expenses, file, indent=4)
 
+def load_expenses():
+    try:
+        with open("expenses.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
+expenses = load_expenses()
 while True:
     print("\nStudent Expense Tracker")
     print("1. Add Expense")
