@@ -1,9 +1,19 @@
 
 
 import json
+from datetime import datetime
 
 
+def get_valid_date():
+     while True:
+        date = input("Enter expense date (DD-MM-YYYY): ")
 
+        try:
+            valid_date = datetime.strptime(date, "%d-%m-%Y")
+            return valid_date.strftime("%d-%m-%Y")
+
+        except ValueError:
+            print("Please enter a valid date in DD-MM-YYYY format.")
 
 def add_expense():
     while True:
@@ -17,7 +27,8 @@ def add_expense():
 
     
     category=input("Enter expense category: ")
-    date=input("Enter expense date: ")
+    date = get_valid_date()
+
     expense = {
        "amount": amount,
        "category": category,
@@ -26,6 +37,7 @@ def add_expense():
     expenses.append(expense)
     save_expenses()
     print("Expense added!")
+
 
 def view_expenses():
     print("\nYour Expenses:")
@@ -82,6 +94,22 @@ def search_expenses():
 
     if found == False:
         print("No expenses found for this category.")
+
+def search_by_date():
+    search_date = input("Enter date to search: ")
+
+    found = False
+
+    for expense in expenses:
+        if expense["date"] == search_date:
+            print("Amount:", expense["amount"])
+            print("Category:", expense["category"])
+            print("Date:", expense["date"])
+            print("--------------------")
+            found = True
+
+    if found == False:
+        print("No expenses found for this date.")
 
 def delete_expense():
     if len(expenses) == 0:
@@ -156,9 +184,10 @@ while True:
     print("3. Calculate Total")
     print("4. Category Summary")
     print("5. Search Expenses")
-    print("6. Delete Expense")
-    print("7. Edit Expense")
-    print("8. Exit")  
+    print("6. Search by Date")
+    print("7. Delete Expense")
+    print("8. Edit Expense")
+    print("9. Exit")  
 
     choice = input("Enter your choice: ")
 
@@ -173,10 +202,12 @@ while True:
     elif choice == "5":
        search_expenses()
     elif choice == "6":
-        delete_expense()
+       search_by_date()
     elif choice == "7":
+        delete_expense()
+    elif choice == "8":
         edit_expense()
-    elif choice == "8":        
+    elif choice == "9":        
        print("Goodbye!")
        break
     else:
