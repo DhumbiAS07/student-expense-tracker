@@ -67,6 +67,22 @@ def category_summary():
     for category in summary:
         print(category + ":", summary[category])
 
+def search_expenses():
+    search_category = input("Enter category to search: ")
+
+    found = False
+
+    for expense in expenses:
+        if expense["category"].lower() == search_category.lower():
+            print("Amount:", expense["amount"])
+            print("Category:", expense["category"])
+            print("Date:", expense["date"])
+            print("--------------------")
+            found = True
+
+    if found == False:
+        print("No expenses found for this category.")
+
 def delete_expense():
     if len(expenses) == 0:
         print("There are no expenses to delete.")
@@ -135,14 +151,14 @@ def load_expenses():
 
 expenses = load_expenses()
 while True:
-    print("\nStudent Expense Tracker")
     print("1. Add Expense")
     print("2. View Expenses")
     print("3. Calculate Total")
     print("4. Category Summary")
-    print("5. Delete Expense")
-    print("6. Edit Expense")
-    print("7. Exit")   
+    print("5. Search Expenses")
+    print("6. Delete Expense")
+    print("7. Edit Expense")
+    print("8. Exit")  
 
     choice = input("Enter your choice: ")
 
@@ -155,10 +171,12 @@ while True:
     elif choice == "4":
         category_summary()
     elif choice == "5":
-        delete_expense()
+       search_expenses()
     elif choice == "6":
+        delete_expense()
+    elif choice == "7":
         edit_expense()
-    elif choice == "7":        
+    elif choice == "8":        
        print("Goodbye!")
        break
     else:
