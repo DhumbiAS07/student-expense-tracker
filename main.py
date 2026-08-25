@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 def get_valid_date():
-     while True:
+    while True:
         date = input("Enter expense date (DD-MM-YYYY): ")
 
         try:
@@ -96,7 +96,7 @@ def search_expenses():
         print("No expenses found for this category.")
 
 def search_by_date():
-    search_date = input("Enter date to search: ")
+    search_date = get_valid_date()
 
     found = False
 
@@ -152,7 +152,7 @@ def edit_expense():
 
             amount = input("Enter new amount: ")
             category = input("Enter new category: ")
-            date = input("Enter new date: ")
+            date = get_valid_date()
 
             expense["amount"] = float(amount)
             expense["category"] = category
@@ -200,15 +200,15 @@ while True:
     elif choice == "4":
         category_summary()
     elif choice == "5":
-       search_expenses()
+        search_expenses()
     elif choice == "6":
-       search_by_date()
+        search_by_date()
     elif choice == "7":
         delete_expense()
     elif choice == "8":
         edit_expense()
     elif choice == "9":        
-       print("Goodbye!")
-       break
+        print("Goodbye!")
+        break
     else:
         print("Invalid choice. Please try again.")
