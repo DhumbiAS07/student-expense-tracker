@@ -30,10 +30,20 @@ def get_valid_amount():
         except ValueError:
             print("Please enter a valid number.")
 
+def get_valid_category():
+    while True:
+        category = input("Enter expense category: ")
+
+        category = category.strip()
+
+        if category == "":
+            print("Category cannot be empty.")
+        else:
+            return category.title()
+
 def add_expense():
     amount = get_valid_amount()
-    
-    category=input("Enter expense category: ")
+    category = get_valid_category()
     date = get_valid_date()
 
     expense = {
@@ -157,11 +167,11 @@ def edit_expense():
 
             print("\nEnter new details:")
 
-            amount = input("Enter new amount: ")
-            category = input("Enter new category: ")
+            amount = get_valid_amount()
+            category = get_valid_category()
             date = get_valid_date()
 
-            expense["amount"] = float(amount)
+            expense["amount"] = amount
             expense["category"] = category
             expense["date"] = date
             save_expenses()
