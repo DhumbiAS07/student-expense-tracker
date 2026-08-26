@@ -15,16 +15,23 @@ def get_valid_date():
         except ValueError:
             print("Please enter a valid date in DD-MM-YYYY format.")
 
-def add_expense():
+def get_valid_amount():
     while True:
         amount = input("Enter expense amount: ")
 
         try:
-         amount = float(amount)
-         break
-        except ValueError:
-          print("Please enter a valid number.")
+            amount = float(amount)
 
+            if amount <= 0:
+                print("Amount must be greater than zero.")
+            else:
+                return amount
+
+        except ValueError:
+            print("Please enter a valid number.")
+
+def add_expense():
+    amount = get_valid_amount()
     
     category=input("Enter expense category: ")
     date = get_valid_date()
