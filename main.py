@@ -15,6 +15,17 @@ def get_valid_date():
         except ValueError:
             print("Please enter a valid date in DD-MM-YYYY format.")
 
+def get_valid_month():
+    while True:
+        month = input("Enter month and year (MM-YYYY): ")
+
+        try:
+            valid_month = datetime.strptime(month, "%m-%Y")
+            return valid_month.strftime("%m-%Y")
+
+        except ValueError:
+            print("Please enter a valid month in MM-YYYY format.")
+
 def get_valid_amount():
     while True:
         amount = input("Enter expense amount: ")
@@ -95,6 +106,19 @@ def category_summary():
 
     for category in summary:
         print(category + ":", summary[category])
+
+def monthly_summary():
+    search_month = get_valid_month()
+
+    total = 0
+
+    for expense in expenses:
+        expense_month = expense["date"][3:10]
+
+        if expense_month == search_month:
+            total = total + expense["amount"]
+
+    print("Total expenses for", search_month, ":", total)
 
 def search_expenses():
     search_category = input("Enter category to search: ")
@@ -195,6 +219,7 @@ def load_expenses():
         return []
 
 expenses = load_expenses()
+monthly_summary()
 while True:
     print("1. Add Expense")
     print("2. View Expenses")
